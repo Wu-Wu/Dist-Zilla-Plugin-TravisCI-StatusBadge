@@ -6,12 +6,12 @@ use strict;
 use warnings;
 use Moose;
 use namespace::autoclean;
+use Dist::Zilla::File::OnDisk;
 
 # VERSION
 # AUTHORITY
 
 with qw(
-    Dist::Zilla::Role::Plugin
     Dist::Zilla::Role::InstallTool
 );
 
@@ -22,34 +22,56 @@ has readme => (
 );
 
 has user => (
-    is          => 'rw',
-    isa         => 'Str',
-    required    => 1,
+    is      => 'rw',
+    isa     => 'Str',
+    default => sub { '' },
 );
 
 has repo => (
-    is          => 'rw',
-    isa         => 'Str',
-    required    => 1,
+    is      => 'rw',
+    isa     => 'Str',
+    default => sub { '' },
 );
 
 sub setup_installer {
     my ($self) = @_;
 
-    my $edited;
-    my $readme = first { $_->name eq $self->readme } @{ $self->zilla->files } or return;
-
-    foreach my $line (split /\n/, $readme->content) {
-        if ($line =~ /^# VERSION/) {
-            $line .= "\n" . sprintf(
-                '[![build status](https://secure.travis-ci.org/%s/%s.png)](https://travis-ci.org/%s/%s)' =>
-                ($self->user, $self->repo) x 2
-            );
-        }
-        $edited .= $line . "\n";
+    if ($self->user eq '' || $self->repo eq '') {
+        $self->log("Missing option: user or repo.");
+        return;
     }
 
-    $readme->content($edited);
+    my $file  = $self->zilla->root->file($self->readme);
+
+    if (-e $file) {
+        $self->log("Override " . $self->readme . " in root directory.");
+        my $readme = Dist::Zilla::File::OnDisk->new(name => "$file");
+
+        my $edited;
+
+        require File::Slurp;
+
+        foreach my $line (split /\n/, $readme->content) {
+            if ($line =~ /^# VERSION/) {
+                $self->log("Inject build status badge");
+                $line = join '' =>
+                    sprintf(
+                        "[![build status](https://secure.travis-ci.org/%s/%s.png)](https://travis-ci.org/%s/%s)\n\n" =>
+                        ($self->user, $self->repo) x 2
+                    ),
+                    $line;
+            }
+            $edited .= $line . "\n";
+        }
+
+        File::Slurp::write_file("$file", {binmode => ':raw'}, $edited);
+    }
+    else {
+        $self->log("Not found " . $self->readme . " in root directory.");
+        return;
+    }
+
+    return;
 }
 
 __PACKAGE__->meta->make_immutable;
