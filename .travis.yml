@@ -10,6 +10,7 @@ perl:
     - "5.8"
 
 before_install:
+    - "echo 'user CHIM' > ~/.pause"
     - "cpanm -q -n Test::CPAN::Meta"
     - "cpanm -q -n Test::Pod"
     - "cpanm -q -n Dist::Zilla::Plugin::Authority"
