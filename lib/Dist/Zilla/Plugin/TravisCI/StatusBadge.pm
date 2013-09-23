@@ -1,11 +1,14 @@
 package Dist::Zilla::Plugin::TravisCI::StatusBadge;
 
-# ABSTRACT: Get Travis CI status badge for your dist
+# ABSTRACT: Get Travis CI status badge for your markdown README
 
 use strict;
 use warnings;
 use Moose;
 use namespace::autoclean;
+
+# VERSION
+# AUTHORITY
 
 with qw(
     Dist::Zilla::Role::Plugin
@@ -56,5 +59,39 @@ __PACKAGE__->meta->make_immutable;
 __END__
 
 =pod
+
+=head1 SYNOPSIS
+
+    ; in dist.ini
+    [TravisCI::StatusBadge]
+    user = johndoe
+    repo = p5-John-Doe-Stuff
+
+=head1 DESCRIPTION
+
+Scans dist files if a C<README.md> file has found, a Travis CI 'build status' badge will be added after B<VERSION> header.
+Use L<Dist::Zilla::Plugin:::ReadmeAnyFromPod> in markdown mode or any other plugin to generate README.md.
+
+=head1 OPTIONS
+
+=head2 readme
+
+The name of file to inject build status badge. Default value is C<README.md>.
+
+=head2 user
+
+Travis CI username. Required.
+
+=head2 repo
+
+Travis CI repository name. Required.
+
+=head1 SEE ALSO
+
+L<https://travis-ci.org>
+
+L<Dist::Zilla::Plugin:::ReadmeAnyFromPod>
+
+L<Dist::Zilla>
 
 =cut
