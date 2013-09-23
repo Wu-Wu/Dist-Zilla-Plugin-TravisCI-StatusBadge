@@ -4,7 +4,7 @@ Dist::Zilla::Plugin::TravisCI::StatusBadge - Get Travis CI status badge for your
 
 # VERSION
 
-version 0.001
+version 0.002
 
 # SYNOPSIS
 
@@ -15,7 +15,7 @@ version 0.001
 
 # DESCRIPTION
 
-Scans dist files if a `README.md` file has found, a Travis CI 'build status' badge will be added after __VERSION__ header.
+Scans dist files if a `README.md` file has found, a Travis CI 'build status' badge will be added before the __VERSION__ header.
 Use [Dist::Zilla::Plugin:::ReadmeAnyFromPod](http://search.cpan.org/perldoc?Dist::Zilla::Plugin:::ReadmeAnyFromPod) in markdown mode or any other plugin to generate README.md.
 
 # OPTIONS
