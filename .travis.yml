@@ -13,14 +13,6 @@ before_install:
     - "echo 'user CHIM' > ~/.pause"
     - "cpanm -q -n Test::CPAN::Meta"
     - "cpanm -q -n Test::Pod"
-    - "cpanm -q -n Dist::Zilla::Plugin::Authority"
-    - "cpanm -q -n Dist::Zilla::Plugin::MetaProvides::Package"
-    - "cpanm -q -n Dist::Zilla::Plugin::OurPkgVersion"
-    - "cpanm -q -n Dist::Zilla::Plugin::PodWeaver"
-    - "cpanm -q -n Dist::Zilla::Plugin::ReadmeAnyFromPod"
-    - "cpanm -q -n Dist::Zilla::Plugin::ReadmeFromPod"
-    - "cpanm -q -n Dist::Zilla::Plugin::Test::Compile"
-    - "cpanm -q -n Dist::Zilla::Plugin::Test::Version"
 
 install:
     - "dzil authordeps --missing | xargs cpanm -q -n && dzil listdeps --missing | xargs cpanm -q -n"
