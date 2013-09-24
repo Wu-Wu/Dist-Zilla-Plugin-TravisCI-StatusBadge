@@ -2,9 +2,11 @@
 
 Dist::Zilla::Plugin::TravisCI::StatusBadge - Get Travis CI status badge for your markdown README
 
+[![build status](https://secure.travis-ci.org/Wu-Wu/Dist-Zilla-Plugin-TravisCI-StatusBadge.png)](https://travis-ci.org/Wu-Wu/Dist-Zilla-Plugin-TravisCI-StatusBadge)
+
 # VERSION
 
-version 0.002
+version 0.003
 
 # SYNOPSIS
 
