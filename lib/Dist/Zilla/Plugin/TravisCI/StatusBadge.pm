@@ -91,8 +91,8 @@ __END__
 
 =head1 DESCRIPTION
 
-Scans dist files if a C<README.md> file has found, a Travis CI 'build status' badge will be added before the B<VERSION> header.
-Use L<Dist::Zilla::Plugin:::ReadmeAnyFromPod> in markdown mode or any other plugin to generate README.md.
+Scans dist files if a C<README.md> file has found, a Travis CI C<build status> badge will be added before the B<VERSION> header.
+Use L<Dist::Zilla::Plugin::ReadmeAnyFromPod> in markdown mode or any other plugin to generate README.md.
 
 =head1 OPTIONS
 
@@ -112,7 +112,7 @@ Github repository name. Required.
 
 L<https://travis-ci.org>
 
-L<Dist::Zilla::Plugin:::ReadmeAnyFromPod>
+L<Dist::Zilla::Plugin::ReadmeAnyFromPod>
 
 L<Dist::Zilla>
 

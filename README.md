@@ -17,8 +17,8 @@ version 0.003
 
 # DESCRIPTION
 
-Scans dist files if a `README.md` file has found, a Travis CI 'build status' badge will be added before the __VERSION__ header.
-Use [Dist::Zilla::Plugin:::ReadmeAnyFromPod](http://search.cpan.org/perldoc?Dist::Zilla::Plugin:::ReadmeAnyFromPod) in markdown mode or any other plugin to generate README.md.
+Scans dist files if a `README.md` file has found, a Travis CI `build status` badge will be added before the __VERSION__ header.
+Use [Dist::Zilla::Plugin::ReadmeAnyFromPod](http://search.cpan.org/perldoc?Dist::Zilla::Plugin::ReadmeAnyFromPod) in markdown mode or any other plugin to generate README.md.
 
 # OPTIONS
 
@@ -38,7 +38,7 @@ Github repository name. Required.
 
 [https://travis-ci.org](https://travis-ci.org)
 
-[Dist::Zilla::Plugin:::ReadmeAnyFromPod](http://search.cpan.org/perldoc?Dist::Zilla::Plugin:::ReadmeAnyFromPod)
+[Dist::Zilla::Plugin::ReadmeAnyFromPod](http://search.cpan.org/perldoc?Dist::Zilla::Plugin::ReadmeAnyFromPod)
 
 [Dist::Zilla](http://search.cpan.org/perldoc?Dist::Zilla)
 
