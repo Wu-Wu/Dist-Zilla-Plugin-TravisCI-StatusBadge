@@ -2,6 +2,8 @@ Revision history for Perl module Dist::Zilla::Plugin::TravisCI::StatusBadge.
 
 {{$NEXT}}
 
+0.003   Sat Oct 5 18:43:14 2013 +0000
+
     [ DOCUMENTATION ]
     - fixed user/repo name in the pod
     - fixed links to Dist::Zilla::Plugin::ReadmeAnyFromPod
