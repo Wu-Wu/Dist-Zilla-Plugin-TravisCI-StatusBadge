@@ -6,6 +6,9 @@ Revision history for Perl module Dist::Zilla::Plugin::TravisCI::StatusBadge.
     - fixed user/repo name in the pod
     - fixed links to Dist::Zilla::Plugin::ReadmeAnyFromPod
 
+    [ TESTS ]
+    - added feature testing
+
     [ META ]
     - start using groups in Changes
 
