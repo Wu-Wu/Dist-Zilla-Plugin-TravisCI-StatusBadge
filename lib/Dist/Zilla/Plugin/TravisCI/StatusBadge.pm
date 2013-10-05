@@ -102,11 +102,11 @@ The name of file to inject build status badge. Default value is C<README.md>.
 
 =head2 user
 
-Travis CI username. Required.
+Github username. Required.
 
 =head2 repo
 
-Travis CI repository name. Required.
+Github repository name. Required.
 
 =head1 SEE ALSO
 
