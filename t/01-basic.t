@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::Most tests => 12;
+use Test::Most tests => 13;
 
 use Test::DZil;
 use Dist::Zilla::Plugin::ReadmeAnyFromPod;
@@ -25,6 +25,10 @@ my @configs = (
         qr{[^\Q[![build status]\E]},
 );
 
+my $no_readme = [
+    $md, [ 'TravisCI::StatusBadge' => { repo => 'p5-John-Doe', user => 'johndoe', readme => 'README.markdown' } ],
+];
+
 my $builder = sub {
     Builder->from_config(
         {   dist_root => 'corpus/dist/DZT' },
@@ -44,5 +48,8 @@ while (my ($case, $config, $result) = splice @configs, 0, 3) {
         like $content, qr/$result/,                                         "$case Travis CI build status badge okay";
     }
 }
+
+my $tzil = $builder->(@$no_readme);
+lives_ok { $tzil->build; }                                                  "wrong README.md dist built okay";
 
 1;
