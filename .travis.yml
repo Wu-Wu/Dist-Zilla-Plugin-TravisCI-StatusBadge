@@ -22,4 +22,4 @@ script:
 
 after_success:
     - "cpanm -q -n --skip-satisfied Dist::Zilla::App::Command::cover Devel::Cover::Report::Coveralls"
-    - "dzil cover -test -report coveralls"
+    - "dzil cover -report coveralls"
