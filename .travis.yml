@@ -19,3 +19,8 @@ install:
 
 script:
     - "dzil test --release"
+
+after_success:
+    - "cpanm -q -n Dist::Zilla::App::Command::cover Devel::Cover::Report::Coveralls"
+    - "dzil cover -test"
+    - "dzil cover -report coveralls"
