@@ -4,6 +4,8 @@ package Dist::Zilla::Plugin::TravisCI::StatusBadge;
 
 use strict;
 use warnings;
+use Path::Tiny 0.004;
+use Encode qw(encode);
 use Moose;
 use namespace::autoclean;
 use Dist::Zilla::File::OnDisk;
@@ -12,7 +14,7 @@ use Dist::Zilla::File::OnDisk;
 # AUTHORITY
 
 with qw(
-    Dist::Zilla::Role::InstallTool
+    Dist::Zilla::Role::AfterBuild
 );
 
 has readme => (
@@ -33,7 +35,7 @@ has repo => (
     default => sub { '' },
 );
 
-sub setup_installer {
+sub after_build {
     my ($self) = @_;
 
     if ($self->user eq '' || $self->repo eq '') {
@@ -49,8 +51,6 @@ sub setup_installer {
 
         my $edited;
 
-        require File::Slurp;
-
         foreach my $line (split /\n/, $readme->content) {
             if ($line =~ /^# VERSION/) {
                 $self->log("Inject build status badge");
@@ -64,7 +64,17 @@ sub setup_installer {
             $edited .= $line . "\n";
         }
 
-        File::Slurp::write_file("$file", {binmode => ':raw'}, $edited);
+        my $encoding =
+            $readme->can('encoding')
+                ? $readme->encoding
+                : 'raw'                             # Dist::Zilla pre-5.0
+                ;
+
+        Path::Tiny::path($file)->spew_raw(
+            $encoding eq 'raw'
+                ? $edited
+                : encode($encoding, $edited)
+        );
     }
     else {
         $self->log("Not found " . $self->readme . " in root directory.");

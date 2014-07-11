@@ -1,6 +1,8 @@
 Revision history for Perl module Dist::Zilla::Plugin::TravisCI::StatusBadge.
 
 {{$NEXT}}
+    [BUGFIXES]
+    - support for dzil-v5
 
 0.003   Sat Oct 5 18:43:14 2013 +0000
 
