@@ -1,11 +1,12 @@
 Revision history for Perl module Dist::Zilla::Plugin::TravisCI::StatusBadge.
 
 {{$NEXT}}
+
     [ BUGFIXES ]
     - support for dzil-v5
 
     [ FEATURES ]
-    - select desired brunch to show build status
+    - select desired branch to show build status
     - support both raster and vector images
 
 0.003   Sat Oct 5 18:43:14 2013 +0000
