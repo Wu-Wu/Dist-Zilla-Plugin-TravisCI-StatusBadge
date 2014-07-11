@@ -2,7 +2,7 @@
 
 Dist::Zilla::Plugin::TravisCI::StatusBadge - Get Travis CI status badge for your markdown README
 
-[![Build Status](https://travis-ci.org/Wu-Wu/Dist-Zilla-Plugin-TravisCI-StatusBadge.png?branch=master)](https://travis-ci.org/Wu-Wu/Dist-Zilla-Plugin-TravisCI-StatusBadge)
+[![Build Status](https://travis-ci.org/Wu-Wu/Dist-Zilla-Plugin-TravisCI-StatusBadge.svg?branch=master)](https://travis-ci.org/Wu-Wu/Dist-Zilla-Plugin-TravisCI-StatusBadge)
 
 # VERSION
 
@@ -15,6 +15,7 @@ version 0.004
     user = johndoe
     repo = p5-John-Doe-Stuff
     branch = foo        ;; "master" by default
+    vector = 1          ;; SVG image
 
 # DESCRIPTION
 
@@ -38,6 +39,11 @@ Github repository name. Required.
 ## branch
 
 Branch name which build status should be shown. Optional. Default value is **master**.
+
+## vector
+
+Use vector representation (SVG) of build status image. Optional. Default value is **false** which means
+using of the raster representation (PNG).
 
 # SEE ALSO
 

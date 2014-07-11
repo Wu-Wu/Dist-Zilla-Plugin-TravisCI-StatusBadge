@@ -41,6 +41,12 @@ has branch => (
     default => sub { 'master' },
 );
 
+has vector => (
+    is      => 'rw',
+    isa     => 'Bool',
+    default => sub { 0 },
+);
+
 sub after_build {
     my ($self) = @_;
 
@@ -62,8 +68,10 @@ sub after_build {
                 $self->log("Inject build status badge");
                 $line = join '' =>
                     sprintf(
-                        "[![Build Status](https://travis-ci.org/%s/%s.png?branch=%s)](https://travis-ci.org/%s/%s)\n\n" =>
-                        $self->user, $self->repo, $self->branch, $self->user, $self->repo
+                        "[![Build Status](https://travis-ci.org/%s/%s.%s?branch=%s)](https://travis-ci.org/%s/%s)\n\n" =>
+                        $self->user, $self->repo,
+                        ( $self->vector ? 'svg' : 'png' ),
+                        $self->branch, $self->user, $self->repo
                     ),
                     $line;
             }
@@ -105,6 +113,7 @@ __END__
     user = johndoe
     repo = p5-John-Doe-Stuff
     branch = foo        ;; "master" by default
+    vector = 1          ;; SVG image
 
 =head1 DESCRIPTION
 
@@ -128,6 +137,11 @@ Github repository name. Required.
 =head2 branch
 
 Branch name which build status should be shown. Optional. Default value is B<master>.
+
+=head2 vector
+
+Use vector representation (SVG) of build status image. Optional. Default value is B<false> which means
+using of the raster representation (PNG).
 
 =head1 SEE ALSO
 

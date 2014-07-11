@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::Most tests => 16;
+use Test::Most tests => 19;
 
 use Test::DZil;
 use Dist::Zilla::Plugin::ReadmeAnyFromPod;
@@ -19,6 +19,8 @@ my @configs = (
         qr{\Q[![Build Status]\E.*travis-ci\.org.*master.*johndoe/p5-John-Doe.*},
     okay_branch => [ $md, [ 'TravisCI::StatusBadge' => { repo => 'p5-John-Doe', user => 'johndoe', branch => 'foo22' } ] ],
         qr{\Q[![Build Status]\E.*travis-ci\.org.*foo22.*johndoe/p5-John-Doe.*},
+    okay_vector => [ $md, [ 'TravisCI::StatusBadge' => { repo => 'p5-John-Doe', user => 'johndoe', vector => 1 } ] ],
+        qr{\Q[![Build Status]\E.*travis-ci\.org.*svg\?branch.*johndoe/p5-John-Doe.*},
     missed_both => [ $md, [ 'TravisCI::StatusBadge' => { } ] ],
         qr{[^\Q[![Build Status]\E]},
     missed_user => [ $md, [ 'TravisCI::StatusBadge' => { repo => 'p5-John-Doe' } ] ],
