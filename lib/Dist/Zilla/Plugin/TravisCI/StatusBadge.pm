@@ -56,7 +56,7 @@ sub after_build {
                 $self->log("Inject build status badge");
                 $line = join '' =>
                     sprintf(
-                        "[![build status](https://secure.travis-ci.org/%s/%s.png)](https://travis-ci.org/%s/%s)\n\n" =>
+                        "[![Build Status](https://travis-ci.org/%s/%s.png?branch=master)](https://travis-ci.org/%s/%s)\n\n" =>
                         ($self->user, $self->repo) x 2
                     ),
                     $line;

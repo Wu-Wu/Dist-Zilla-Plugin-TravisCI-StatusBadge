@@ -16,13 +16,13 @@ my $md = [
 
 my @configs = (
     config_okay => [ $md, [ 'TravisCI::StatusBadge' => { repo => 'p5-John-Doe', user => 'johndoe' } ] ],
-        qr{\Q[![build status]\E.*travis-ci\.org.*johndoe/p5-John-Doe.*},
+        qr{\Q[![Build Status]\E.*travis-ci\.org.*johndoe/p5-John-Doe.*},
     missed_both => [ $md, [ 'TravisCI::StatusBadge' => { } ] ],
-        qr{[^\Q[![build status]\E]},
+        qr{[^\Q[![Build Status]\E]},
     missed_user => [ $md, [ 'TravisCI::StatusBadge' => { repo => 'p5-John-Doe' } ] ],
-        qr{[^\Q[![build status]\E]},
+        qr{[^\Q[![Build Status]\E]},
     missed_repo => [ $md, [ 'TravisCI::StatusBadge' => { user => 'johndoe' } ] ],
-        qr{[^\Q[![build status]\E]},
+        qr{[^\Q[![Build Status]\E]},
 );
 
 my $no_readme = [
