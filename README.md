@@ -14,6 +14,7 @@ version 0.004
     [TravisCI::StatusBadge]
     user = johndoe
     repo = p5-John-Doe-Stuff
+    branch = foo        ;; "master" by default
 
 # DESCRIPTION
 
@@ -33,6 +34,10 @@ Github username. Required.
 ## repo
 
 Github repository name. Required.
+
+## branch
+
+Branch name which build status should be shown. Optional. Default value is **master**.
 
 # SEE ALSO
 

@@ -35,6 +35,12 @@ has repo => (
     default => sub { '' },
 );
 
+has branch => (
+    is      => 'rw',
+    isa     => 'Str',
+    default => sub { 'master' },
+);
+
 sub after_build {
     my ($self) = @_;
 
@@ -56,8 +62,8 @@ sub after_build {
                 $self->log("Inject build status badge");
                 $line = join '' =>
                     sprintf(
-                        "[![Build Status](https://travis-ci.org/%s/%s.png?branch=master)](https://travis-ci.org/%s/%s)\n\n" =>
-                        ($self->user, $self->repo) x 2
+                        "[![Build Status](https://travis-ci.org/%s/%s.png?branch=%s)](https://travis-ci.org/%s/%s)\n\n" =>
+                        $self->user, $self->repo, $self->branch, $self->user, $self->repo
                     ),
                     $line;
             }
@@ -98,6 +104,7 @@ __END__
     [TravisCI::StatusBadge]
     user = johndoe
     repo = p5-John-Doe-Stuff
+    branch = foo        ;; "master" by default
 
 =head1 DESCRIPTION
 
@@ -117,6 +124,10 @@ Github username. Required.
 =head2 repo
 
 Github repository name. Required.
+
+=head2 branch
+
+Branch name which build status should be shown. Optional. Default value is B<master>.
 
 =head1 SEE ALSO
 
