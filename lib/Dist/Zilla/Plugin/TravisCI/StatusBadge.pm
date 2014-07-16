@@ -47,6 +47,10 @@ has vector => (
     default => sub { 0 },
 );
 
+=for Pod::Coverage after_build
+
+=cut
+
 sub after_build {
     my ($self) = @_;
 
@@ -148,6 +152,8 @@ using of the raster representation (PNG).
 L<https://travis-ci.org>
 
 L<Dist::Zilla::Plugin::ReadmeAnyFromPod>
+
+L<Dist::Zilla::Role::AfterBuild>
 
 L<Dist::Zilla>
 

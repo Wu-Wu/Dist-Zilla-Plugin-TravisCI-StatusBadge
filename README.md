@@ -6,7 +6,7 @@ Dist::Zilla::Plugin::TravisCI::StatusBadge - Get Travis CI status badge for your
 
 # VERSION
 
-version 0.004
+version 0.005
 
 # SYNOPSIS
 
@@ -50,6 +50,8 @@ using of the raster representation (PNG).
 [https://travis-ci.org](https://travis-ci.org)
 
 [Dist::Zilla::Plugin::ReadmeAnyFromPod](https://metacpan.org/pod/Dist::Zilla::Plugin::ReadmeAnyFromPod)
+
+[Dist::Zilla::Role::AfterBuild](https://metacpan.org/pod/Dist::Zilla::Role::AfterBuild)
 
 [Dist::Zilla](https://metacpan.org/pod/Dist::Zilla)
 
