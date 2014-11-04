@@ -24,15 +24,15 @@ has readme => (
 );
 
 has user => (
-    is      => 'rw',
-    isa     => 'Str',
-    default => sub { '' },
+    is          => 'rw',
+    isa         => 'Str',
+    predicate   => 'has_user',
 );
 
 has repo => (
-    is      => 'rw',
-    isa     => 'Str',
-    default => sub { '' },
+    is          => 'rw',
+    isa         => 'Str',
+    predicate   => 'has_repo',
 );
 
 has branch => (
@@ -54,8 +54,8 @@ has vector => (
 sub after_build {
     my ($self) = @_;
 
-    if ($self->user eq '' || $self->repo eq '') {
-        $self->log("Missing option: user or repo.");
+    unless ( $self->has_user && $self->has_repo ) {
+        $self->log( "Missing option: user or repo." );
         return;
     }
 
