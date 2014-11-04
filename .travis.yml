@@ -1,7 +1,7 @@
 language: perl
 
 perl:
-    - "5.19"
+    - "5.20"
     - "5.18"
     - "5.16"
     - "5.14"
@@ -10,6 +10,8 @@ perl:
 
 before_install:
     - "echo 'user CHIM' > ~/.pause"
+    - "git config user.email 'chim@cpan.org'"
+    - "git config user.name 'Anton Gerasimov'"
     - "cpanm -q -n Test::CPAN::Meta Test::Pod Test::Pod::Coverage"
     - "cpanm -q -n Dist::Zilla::PluginBundle::Author::CHIM"
 
