@@ -48,7 +48,7 @@ describe "TravisCI::StatusBadge" => sub {
             before all => sub {
                 $tzil = $builder->(
                     [ 'TravisCI::StatusBadge' => {} ]
-                )
+                );
             };
 
             it "should build dist" => sub {
@@ -71,7 +71,7 @@ describe "TravisCI::StatusBadge" => sub {
             before all => sub {
                 $tzil = $builder->(
                     [ 'TravisCI::StatusBadge' => { repo => 'p5-John-Doe' } ]
-                )
+                );
             };
 
             it "should build dist" => sub {
@@ -94,7 +94,7 @@ describe "TravisCI::StatusBadge" => sub {
             before all => sub {
                 $tzil = $builder->(
                     [ 'TravisCI::StatusBadge' => { user => 'johndoe' } ]
-                )
+                );
             };
 
             it "should build dist" => sub {
@@ -124,7 +124,7 @@ describe "TravisCI::StatusBadge" => sub {
                         readme  => 'README.markdown'
                     }
                 ]
-            )
+            );
         };
 
         it "should build dist" => sub {
@@ -153,7 +153,7 @@ describe "TravisCI::StatusBadge" => sub {
                             user    => 'johndoe',
                         }
                     ]
-                )
+                );
             };
 
             it "should build dist" => sub {
@@ -182,7 +182,7 @@ describe "TravisCI::StatusBadge" => sub {
                             branch  => 'foo22',
                         }
                     ]
-                )
+                );
             };
 
             it "should build dist" => sub {
@@ -211,7 +211,7 @@ describe "TravisCI::StatusBadge" => sub {
                             vector  => 1,
                         }
                     ]
-                )
+                );
             };
 
             it "should build dist" => sub {
