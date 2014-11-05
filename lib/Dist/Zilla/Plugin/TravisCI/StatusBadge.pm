@@ -135,7 +135,10 @@ sub _try_distmeta {
     );
 
     # remove duplicates
-    @sources = sort keys { map { $_ => 1 } @sources };
+    @sources = do {
+        my %seen = map { $_ => 1 } @sources;
+        sort keys %seen;
+    };
 
     for my $source ( @sources ) {
         # dont overwrite
