@@ -1,6 +1,8 @@
 Revision history for Perl module Dist::Zilla::Plugin::TravisCI::StatusBadge.
 
 {{$NEXT}}
+
+0.005   Wed Nov 5 11:44:54 2014 +0000
     [ FEATURES ]
     - user/repo might be obtained from meta resources (gh #2)
 
