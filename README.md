@@ -17,6 +17,10 @@ version 0.005
     branch = foo        ;; "master" by default
     vector = 1          ;; SVG image
 
+    ; or just
+    [TravisCI::StatusBadge]
+    ;; shortcut for "png image; master branch; user/repo from meta resources"
+
 # DESCRIPTION
 
 Scans dist files if a `README.md` file has found, a Travis CI `build status` badge will be added before the **VERSION** header.
@@ -30,11 +34,13 @@ The name of file to inject build status badge. Default value is `README.md`.
 
 ## user
 
-Github username. Required.
+Github username. Might be obtained automatically (if not given) from META resources (`resources.homepage`,
+`resources.repository.web`, `resources.repository.url`).
 
 ## repo
 
-Github repository name. Required.
+Github repository name. Might be obtained automatically (if not given) from META resources
+(`resources.homepage`, `resources.repository.web`, `resources.repository.url`).
 
 ## branch
 
@@ -50,6 +56,8 @@ using of the raster representation (PNG).
 [https://travis-ci.org](https://travis-ci.org)
 
 [Dist::Zilla::Plugin::ReadmeAnyFromPod](https://metacpan.org/pod/Dist::Zilla::Plugin::ReadmeAnyFromPod)
+
+[Dist::Zilla::Plugin::GithubMeta](https://metacpan.org/pod/Dist::Zilla::Plugin::GithubMeta)
 
 [Dist::Zilla::Role::AfterBuild](https://metacpan.org/pod/Dist::Zilla::Role::AfterBuild)
 

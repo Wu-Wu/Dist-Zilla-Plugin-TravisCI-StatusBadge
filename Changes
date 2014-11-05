@@ -1,6 +1,8 @@
 Revision history for Perl module Dist::Zilla::Plugin::TravisCI::StatusBadge.
 
 {{$NEXT}}
+    [ FEATURES ]
+    - user/repo might be obtained from meta resources (gh #2)
 
     [ TESTS ]
     - using Test::Spec now
