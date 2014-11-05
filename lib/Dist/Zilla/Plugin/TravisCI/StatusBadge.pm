@@ -54,6 +54,9 @@ has vector => (
 sub after_build {
     my ($self) = @_;
 
+    # fill user/repo using distmeta
+    $self->_try_distmeta()      unless $self->has_user && $self->has_repo;
+
     unless ( $self->has_user && $self->has_repo ) {
         $self->log( "Missing option: user or repo." );
         return;
@@ -100,6 +103,62 @@ sub after_build {
     }
 
     return;
+}
+
+=for Pod::Coverage _try_distmeta
+
+=cut
+
+# attempt to fill user/repo using distmeta resources
+sub _try_distmeta {
+    my ( $self ) = @_;
+
+    my $meta = $self->zilla->distmeta;
+
+    return      unless exists $meta->{resources};
+
+    # possible list of sources for user/repo:
+    # resources.repository.web
+    # resources.repository.url
+    # resources.homepage
+    my @sources = (
+        (
+            exists $meta->{resources}{repository}
+                ? grep { defined $_ } @{ $meta->{resources}{repository} }{qw( web url )}
+                : ()
+        ),
+        (
+            exists $meta->{resources}{homepage}
+                ? $meta->{resources}{homepage}
+                : ()
+        ),
+    );
+
+    # remove duplicates
+    @sources = sort keys { map { $_ => 1 } @sources };
+
+    for my $source ( @sources ) {
+        # dont overwrite
+        return      if $self->has_user && $self->has_repo;
+
+        next        unless $source =~ m/github\.com/i;
+
+        # taken from Dist/Zilla/Plugin/GithubMeta.pm
+        # thanks to BINGOS!
+        my ( $user, $repo ) = $source =~ m{
+            github\.com              # the domain
+            [:/] ([^/]+)             # the username (: for ssh, / for http)
+            /    ([^/]+?) (?:\.git)? # the repo name
+            $
+        }ix;
+
+        next        unless defined $user && defined $repo;
+
+        $self->user( $user );
+        $self->repo( $repo );
+
+        return;
+    }
 }
 
 __PACKAGE__->meta->make_immutable;

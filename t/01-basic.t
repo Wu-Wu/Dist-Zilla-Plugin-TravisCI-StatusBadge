@@ -2,39 +2,7 @@ use Test::Spec;
 use Test::Exception;
 use Test::DZil;
 
-my $README_MD = <<"END_README_MD";
-# NAME
-
-Foo::Bar - Foo and Bar
-
-# VERSION
-
-version 0.001
-
-# SYNOPSIS
-
-    use Foo::Bar;
-
-# DESCRIPTION
-Tellus proin aptent mattis vel pulvinar, et dui netus tellus.
-
-Habitant ipsum nisl ad feugiat orci suscipit et sodales sodales.
-
-Aliquam conubia sodales malesuada scelerisque, faucibus orci dapibus senectus eget.
-
-END_README_MD
-
-my $builder = sub {
-    Builder->from_config(
-        { dist_root => 'corpus/dist/DZT' },
-        {
-            add_files => {
-                'source/README.md'  => $README_MD,
-                'source/dist.ini'   => simple_ini( 'GatherDir', @_ ),
-            }
-        },
-    );
-};
+use t::lib::Builder;
 
 describe "TravisCI::StatusBadge" => sub {
     it "should compile ok" => sub {
@@ -46,7 +14,7 @@ describe "TravisCI::StatusBadge" => sub {
             my ( $tzil );
 
             before all => sub {
-                $tzil = $builder->(
+                $tzil = t::lib::Builder->tzil(
                     [ 'TravisCI::StatusBadge' => {} ]
                 );
             };
@@ -69,7 +37,7 @@ describe "TravisCI::StatusBadge" => sub {
             my ( $tzil );
 
             before all => sub {
-                $tzil = $builder->(
+                $tzil = t::lib::Builder->tzil(
                     [ 'TravisCI::StatusBadge' => { repo => 'p5-John-Doe' } ]
                 );
             };
@@ -92,7 +60,7 @@ describe "TravisCI::StatusBadge" => sub {
             my ( $tzil );
 
             before all => sub {
-                $tzil = $builder->(
+                $tzil = t::lib::Builder->tzil(
                     [ 'TravisCI::StatusBadge' => { user => 'johndoe' } ]
                 );
             };
@@ -116,7 +84,7 @@ describe "TravisCI::StatusBadge" => sub {
         my ( $tzil );
 
         before all => sub {
-            $tzil = $builder->(
+            $tzil = t::lib::Builder->tzil(
                 [
                     'TravisCI::StatusBadge' => {
                         repo    => 'p5-John-Doe',
@@ -146,7 +114,7 @@ describe "TravisCI::StatusBadge" => sub {
             my ( $tzil );
 
             before all => sub {
-                $tzil = $builder->(
+                $tzil = t::lib::Builder->tzil(
                     [
                         'TravisCI::StatusBadge' => {
                             repo    => 'p5-John-Doe',
@@ -174,7 +142,7 @@ describe "TravisCI::StatusBadge" => sub {
             my ( $tzil );
 
             before all => sub {
-                $tzil = $builder->(
+                $tzil = t::lib::Builder->tzil(
                     [
                         'TravisCI::StatusBadge' => {
                             repo    => 'p5-John-Doe',
@@ -203,7 +171,7 @@ describe "TravisCI::StatusBadge" => sub {
             my ( $tzil );
 
             before all => sub {
-                $tzil = $builder->(
+                $tzil = t::lib::Builder->tzil(
                     [
                         'TravisCI::StatusBadge' => {
                             repo    => 'p5-John-Doe',
