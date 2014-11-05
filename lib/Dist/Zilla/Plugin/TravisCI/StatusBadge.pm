@@ -142,7 +142,7 @@ sub _try_distmeta {
 
     for my $source ( @sources ) {
         # dont overwrite
-        return      if $self->has_user && $self->has_repo;
+        last        if $self->has_user && $self->has_repo;
 
         next        unless $source =~ m/github\.com/i;
 
@@ -160,7 +160,7 @@ sub _try_distmeta {
         $self->user( $user );
         $self->repo( $repo );
 
-        return;
+        last;
     }
 }
 
