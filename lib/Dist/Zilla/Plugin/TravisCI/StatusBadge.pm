@@ -52,7 +52,7 @@ has vector => (
 =cut
 
 sub after_build {
-    my ($self) = @_;
+    my ( $self ) = @_;
 
     # fill user/repo using distmeta
     $self->_try_distmeta()      unless $self->has_user && $self->has_repo;
@@ -62,45 +62,45 @@ sub after_build {
         return;
     }
 
-    my $file  = $self->zilla->root->file($self->readme);
+    my $file = $self->zilla->root->file( $self->readme );
 
-    if (-e $file) {
-        $self->log("Override " . $self->readme . " in root directory.");
-        my $readme = Dist::Zilla::File::OnDisk->new(name => "$file");
-
-        my $edited;
-
-        foreach my $line (split /\n/, $readme->content) {
-            if ($line =~ /^# VERSION/) {
-                $self->log("Inject build status badge");
-                $line = join '' =>
-                    sprintf(
-                        "[![Build Status](https://travis-ci.org/%s/%s.%s?branch=%s)](https://travis-ci.org/%s/%s)\n\n" =>
-                        $self->user, $self->repo,
-                        ( $self->vector ? 'svg' : 'png' ),
-                        $self->branch, $self->user, $self->repo
-                    ),
-                    $line;
-            }
-            $edited .= $line . "\n";
-        }
-
-        my $encoding =
-            $readme->can('encoding')
-                ? $readme->encoding
-                : 'raw'                             # Dist::Zilla pre-5.0
-                ;
-
-        Path::Tiny::path($file)->spew_raw(
-            $encoding eq 'raw'
-                ? $edited
-                : encode($encoding, $edited)
-        );
-    }
-    else {
-        $self->log("Not found " . $self->readme . " in root directory.");
+    unless ( -e $file ) {
+        $self->log( "Not found " . $self->readme . " in root directory." );
         return;
     }
+
+    $self->log( "Override " . $self->readme . " in root directory." );
+
+    my $readme = Dist::Zilla::File::OnDisk->new( name => "$file" );
+
+    my $edited;
+
+    foreach my $line ( split /\n/, $readme->content ) {
+        if ( $line =~ /^# VERSION/ ) {
+            $self->log( "Inject build status badge" );
+            $line = join '' =>
+                sprintf(
+                    "[![Build Status](https://travis-ci.org/%s/%s.%s?branch=%s)](https://travis-ci.org/%s/%s)\n\n" =>
+                    $self->user, $self->repo,
+                    ( $self->vector ? 'svg' : 'png' ),
+                    $self->branch, $self->user, $self->repo
+                ),
+                $line;
+        }
+        $edited .= $line . "\n";
+    }
+
+    my $encoding =
+        $readme->can( 'encoding' )
+            ? $readme->encoding
+            : 'raw'                             # Dist::Zilla pre-5.0
+            ;
+
+    Path::Tiny::path( $file )->spew_raw(
+        $encoding eq 'raw'
+            ? $edited
+            : encode( $encoding, $edited )
+    );
 
     return;
 }
