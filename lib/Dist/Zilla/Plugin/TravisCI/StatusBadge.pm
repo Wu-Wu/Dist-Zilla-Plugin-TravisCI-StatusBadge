@@ -18,9 +18,10 @@ with qw(
 );
 
 has readme => (
-    is      => 'rw',
-    isa     => 'Str',
-    default => sub { 'README.md' },
+    is          => 'rw',
+    isa         => 'Str',
+    predicate   => 'has_readme',
+    clearer     => 'clear_readme',
 );
 
 has user => (
@@ -47,6 +48,35 @@ has vector => (
     default => sub { 0 },
 );
 
+has ext => (
+    is      => 'rw',
+    isa     => 'ArrayRef',
+    default => sub { [qw( md mkdn markdown )] },
+);
+
+has names => (
+    is      => 'rw',
+    isa     => 'ArrayRef',
+    default => sub { [qw( README Readme )] },
+);
+
+has matrix => (
+    is      => 'rw',
+    isa     => 'ArrayRef',
+    lazy    => 1,
+    default => sub {
+        my ( $self ) = @_;
+
+        my @combies;
+
+        for my $ext ( @{ $self->ext } ) {
+            push @combies, map { $_ . '.' . $ext } @{ $self->names };
+        }
+
+        [ @combies ];
+    },
+);
+
 =for Pod::Coverage after_build
 
 =cut
@@ -62,10 +92,10 @@ sub after_build {
         return;
     }
 
-    my $file = $self->zilla->root->file( $self->readme );
+    my $file = $self->_try_any_readme();
 
-    unless ( -e $file ) {
-        $self->log( "Not found " . $self->readme . " in root directory." );
+    unless ( $self->has_readme ) {
+        $self->log( "No README found in root directory." );
         return;
     }
 
@@ -164,9 +194,41 @@ sub _try_distmeta {
     }
 }
 
+=for Pod::Coverage _try_distmeta
+
+=cut
+
+# guess readme filename
+sub _try_any_readme {
+    my ( $self ) = @_;
+
+    my $zillafile;
+
+    my @variations = (
+        ( $self->has_readme ? $self->readme : () ),
+        @{ $self->matrix },
+    );
+
+    for my $name ( @variations ) {
+        next    unless $name;
+
+        $self->clear_readme;
+
+        my $file = $self->zilla->root->file( $name );
+
+        if ( -e $file ) {
+            $self->readme( $name );
+            $zillafile = $file;
+            last;
+        }
+    }
+
+    return $zillafile;
+}
+
 __PACKAGE__->meta->make_immutable;
 
-1; # End of Dist::Zilla::Plugin::TravisCI::StatusBadge
+1;
 
 __END__
 
