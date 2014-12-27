@@ -21,6 +21,7 @@ before_install:
     - "cpanm -q -n Test::Pod::Coverage"
     - "cpanm -q -n Test::Pod"
     - "cpanm -q -n Test::EOL"
+    - "cpanm -q -n Test::NoTabs"
     - "cpanm -q -n Pod::Coverage::TrustPod"
     - "cpanm -q -n Dist::Zilla::PluginBundle::Author::CHIM@0.052001"
 
