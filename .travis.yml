@@ -22,7 +22,7 @@ before_install:
     - "cpanm -q -n Test::Pod"
     - "cpanm -q -n Test::EOL"
     - "cpanm -q -n Pod::Coverage::TrustPod"
-    - "cpanm -q -n Dist::Zilla::PluginBundle::Author::CHIM"
+    - "cpanm -q -n Dist::Zilla::PluginBundle::Author::CHIM@0.052001"
 
 install:
     - "dzil authordeps --missing | xargs cpanm -q -n && dzil listdeps --missing | xargs cpanm -q -n"
