@@ -2,6 +2,8 @@ Revision history for Perl module Dist::Zilla::Plugin::TravisCI::StatusBadge.
 
 {{$NEXT}}
 
+0.006   Sat Dec 27 19:22:41 2014 +0000
+
     [ FEATURES ]
     - guess target filename and use it when not passed via option
 
