@@ -266,7 +266,7 @@ Use L<Dist::Zilla::Plugin::ReadmeAnyFromPod> in markdown mode or any other plugi
 =head2 readme
 
 The name of file to inject build status badge. No default value but there is some logic to guess target
-filename. File can be named as C<README> or C<Readme> and has the one of follewed extensions: C<md>,
+filename. File can be named as C<README> or C<Readme> and has the one of following extensions: C<md>,
 C<mkdn> or C<markdown>.
 
 In case of some name passed via this option, it will be used only if the target file exists otherwise

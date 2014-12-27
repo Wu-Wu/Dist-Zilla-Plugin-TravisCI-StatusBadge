@@ -40,7 +40,7 @@ Use [Dist::Zilla::Plugin::ReadmeAnyFromPod](https://metacpan.org/pod/Dist::Zilla
 ## readme
 
 The name of file to inject build status badge. No default value but there is some logic to guess target
-filename. File can be named as `README` or `Readme` and has the one of follewed extensions: `md`,
+filename. File can be named as `README` or `Readme` and has the one of following extensions: `md`,
 `mkdn` or `markdown`.
 
 In case of some name passed via this option, it will be used only if the target file exists otherwise
