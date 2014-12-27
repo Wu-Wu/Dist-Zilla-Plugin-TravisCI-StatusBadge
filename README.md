@@ -23,14 +23,28 @@ version 0.006
 
 # DESCRIPTION
 
-Scans dist files if a `README.md` file has found, a Travis CI `build status` badge will be added before the **VERSION** header.
-Use [Dist::Zilla::Plugin::ReadmeAnyFromPod](https://metacpan.org/pod/Dist::Zilla::Plugin::ReadmeAnyFromPod) in markdown mode or any other plugin to generate README.md.
+Injects the Travis CI `Build status` badge before the **VERSION** header into any form of `README.md`
+file.
+
+Traget readme might be pointed via option ["readme"](#readme) or guessed by module.
+
+Use [Dist::Zilla::Plugin::ReadmeAnyFromPod](https://metacpan.org/pod/Dist::Zilla::Plugin::ReadmeAnyFromPod) in markdown mode or any other plugin to generate target file
+
+    [ReadmeAnyFromPod / ReadmeMdInRoot]
+    type     = markdown
+    filename = README.md
+    location = root
 
 # OPTIONS
 
 ## readme
 
-The name of file to inject build status badge. Default value is `README.md`.
+The name of file to inject build status badge. No default value but there is some logic to guess target
+filename. File can be named as `README` or `Readme` and has the one of follewed extensions: `md`,
+`mkdn` or `markdown`.
+
+In case of some name passed via this option, it will be used only if the target file exists otherwise
+will be checked default variations and used first found.
 
 ## user
 

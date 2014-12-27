@@ -249,14 +249,28 @@ __END__
 
 =head1 DESCRIPTION
 
-Scans dist files if a C<README.md> file has found, a Travis CI C<build status> badge will be added before the B<VERSION> header.
-Use L<Dist::Zilla::Plugin::ReadmeAnyFromPod> in markdown mode or any other plugin to generate README.md.
+Injects the Travis CI C<Build status> badge before the B<VERSION> header into any form of C<README.md>
+file.
+
+Traget readme might be pointed via option L</readme> or guessed by module.
+
+Use L<Dist::Zilla::Plugin::ReadmeAnyFromPod> in markdown mode or any other plugin to generate target file
+
+    [ReadmeAnyFromPod / ReadmeMdInRoot]
+    type     = markdown
+    filename = README.md
+    location = root
 
 =head1 OPTIONS
 
 =head2 readme
 
-The name of file to inject build status badge. Default value is C<README.md>.
+The name of file to inject build status badge. No default value but there is some logic to guess target
+filename. File can be named as C<README> or C<Readme> and has the one of follewed extensions: C<md>,
+C<mkdn> or C<markdown>.
+
+In case of some name passed via this option, it will be used only if the target file exists otherwise
+will be checked default variations and used first found.
 
 =head2 user
 
