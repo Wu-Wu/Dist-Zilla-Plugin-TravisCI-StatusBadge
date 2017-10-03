@@ -67,15 +67,22 @@ using of the raster representation (PNG).
 
 # SEE ALSO
 
-[https://travis-ci.org](https://travis-ci.org)
+Please see those modules/websites for more information related to this module.
 
-[Dist::Zilla::Plugin::ReadmeAnyFromPod](https://metacpan.org/pod/Dist::Zilla::Plugin::ReadmeAnyFromPod)
+- [https://travis-ci.org](https://travis-ci.org)
+- [Dist::Zilla::Plugin::ReadmeAnyFromPod](https://metacpan.org/pod/Dist::Zilla::Plugin::ReadmeAnyFromPod)
+- [Dist::Zilla::Plugin::GithubMeta](https://metacpan.org/pod/Dist::Zilla::Plugin::GithubMeta)
+- [Dist::Zilla::Role::AfterBuild](https://metacpan.org/pod/Dist::Zilla::Role::AfterBuild)
+- [Dist::Zilla](https://metacpan.org/pod/Dist::Zilla)
 
-[Dist::Zilla::Plugin::GithubMeta](https://metacpan.org/pod/Dist::Zilla::Plugin::GithubMeta)
+# BUGS
 
-[Dist::Zilla::Role::AfterBuild](https://metacpan.org/pod/Dist::Zilla::Role::AfterBuild)
+Please report any bugs or feature requests on the bugtracker website
+[https://github.com/Wu-Wu/Dist-Zilla-Plugin-TravisCI-StatusBadge/issues](https://github.com/Wu-Wu/Dist-Zilla-Plugin-TravisCI-StatusBadge/issues)
 
-[Dist::Zilla](https://metacpan.org/pod/Dist::Zilla)
+When submitting a bug or request, please include a test-file or a
+patch to an existing test-file that illustrates the bug or desired
+feature.
 
 # AUTHOR
 
