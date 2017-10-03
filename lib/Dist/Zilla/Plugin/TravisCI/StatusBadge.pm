@@ -48,10 +48,16 @@ has vector => (
     default => sub { 0 },
 );
 
+has format => (
+    is          => 'rw',
+    isa         => Moose::Util::TypeConstraints::enum(['markdown', 'pod', '']),
+    default     => sub { '' }
+);
+
 has ext => (
     is      => 'rw',
     isa     => 'ArrayRef',
-    default => sub { [qw( md mkdn markdown )] },
+    default => sub { [qw( md mkdn markdown pod )] },
 );
 
 has names => (
@@ -105,19 +111,34 @@ sub after_build {
 
     my $edited;
 
-    foreach my $line ( split /\n/, $readme->content ) {
-        if ( $line =~ /^# VERSION/ ) {
-            $self->log( "Inject build status badge" );
-            $line = join '' =>
-                sprintf(
-                    "[![Build Status](https://travis-ci.org/%s/%s.%s?branch=%s)](https://travis-ci.org/%s/%s)\n\n" =>
-                    $self->user, $self->repo,
-                    ( $self->vector ? 'svg' : 'png' ),
-                    $self->branch, $self->user, $self->repo
-                ),
-                $line;
+    if ($self->format eq 'pod' || ($self->readme =~ /\.pod$/ && $self->format eq '')) {
+        foreach my $line ( split /\n/, $readme->content ) {
+            if ( $line =~ /^=head1 VERSION/ ) {
+                $self->log( "Inject build status badge" );
+                $line = join '' =>
+                    sprintf(
+                        qq(=for html <a href="https://travis-ci.org/%s/%s"><img alt="Build Status" src="https://travis-ci.org/%s/%s.%s?branch=%s" /></a>\n\n) =>
+                        $self->user, $self->repo,
+                        $self->user, $self->repo, ( $self->vector ? 'svg' : 'png' ), $self->branch,
+                    ),
+                    $line;
+            }
+            $edited .= $line . "\n";
         }
-        $edited .= $line . "\n";
+    } else {
+        foreach my $line ( split /\n/, $readme->content ) {
+            if ( $line =~ /^# VERSION/ ) {
+                $self->log( "Inject build status badge" );
+                $line = join '' =>
+                    sprintf(
+                        "[![Build Status](https://travis-ci.org/%s/%s.%s?branch=%s)](https://travis-ci.org/%s/%s)\n\n" =>
+                        $self->user, $self->repo, ( $self->vector ? 'svg' : 'png' ), $self->branch,
+                        $self->user, $self->repo
+                    ),
+                    $line;
+            }
+            $edited .= $line . "\n";
+        }
     }
 
     my $encoding =
@@ -249,8 +270,7 @@ __END__
 
 =head1 DESCRIPTION
 
-Injects the Travis CI C<Build status> badge before the B<VERSION> header into any form of C<README.md>
-file.
+Injects the Travis CI C<Build status> badge before the B<VERSION> header into any form of C<README.[md|pod]> file.
 
 Traget readme might be pointed via option L</readme> or guessed by module.
 
@@ -267,10 +287,14 @@ Use L<Dist::Zilla::Plugin::ReadmeAnyFromPod> in markdown mode or any other plugi
 
 The name of file to inject build status badge. No default value but there is some logic to guess target
 filename. File can be named as C<README> or C<Readme> and has the one of following extensions: C<md>,
-C<mkdn> or C<markdown>.
+C<mkdn>, C<markdown> or C<pod>.
 
 In case of some name passed via this option, it will be used only if the target file exists otherwise
 will be checked default variations and used first found.
+
+=head2 format
+
+Either C<pod> or C<markdown>. Optional. When unspecified, format is C<pod> if readme has a C<.pod> file extension and C<markdown> otherwise.
 
 =head2 user
 

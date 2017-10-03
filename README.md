@@ -23,8 +23,7 @@ version 0.007
 
 # DESCRIPTION
 
-Injects the Travis CI `Build status` badge before the **VERSION** header into any form of `README.md`
-file.
+Injects the Travis CI `Build status` badge before the **VERSION** header into any form of `README.[md|pod]` file.
 
 Traget readme might be pointed via option ["readme"](#readme) or guessed by module.
 
@@ -41,10 +40,14 @@ Use [Dist::Zilla::Plugin::ReadmeAnyFromPod](https://metacpan.org/pod/Dist::Zilla
 
 The name of file to inject build status badge. No default value but there is some logic to guess target
 filename. File can be named as `README` or `Readme` and has the one of following extensions: `md`,
-`mkdn` or `markdown`.
+`mkdn`, `markdown` or `pod`.
 
 In case of some name passed via this option, it will be used only if the target file exists otherwise
 will be checked default variations and used first found.
+
+## format
+
+Either `pod` or `markdown`. Optional. When unspecified, format is `pod` if readme has a `.pod` file extension and `markdown` otherwise.
 
 ## user
 
