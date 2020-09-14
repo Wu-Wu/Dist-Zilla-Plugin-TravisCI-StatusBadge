@@ -27,7 +27,7 @@ Injects the Travis CI `Build status` badge before the **VERSION** header into an
 
 Traget readme might be pointed via option ["readme"](#readme) or guessed by module.
 
-Use [Dist::Zilla::Plugin::ReadmeAnyFromPod](https://metacpan.org/pod/Dist::Zilla::Plugin::ReadmeAnyFromPod) in markdown mode or any other plugin to generate target file
+Use [Dist::Zilla::Plugin::ReadmeAnyFromPod](https://metacpan.org/pod/Dist%3A%3AZilla%3A%3APlugin%3A%3AReadmeAnyFromPod) in markdown mode or any other plugin to generate target file
 
     [ReadmeAnyFromPod / ReadmeMdInRoot]
     type     = markdown
@@ -73,10 +73,10 @@ using of the raster representation (PNG).
 Please see those modules/websites for more information related to this module.
 
 - [https://travis-ci.org](https://travis-ci.org)
-- [Dist::Zilla::Plugin::ReadmeAnyFromPod](https://metacpan.org/pod/Dist::Zilla::Plugin::ReadmeAnyFromPod)
-- [Dist::Zilla::Plugin::GithubMeta](https://metacpan.org/pod/Dist::Zilla::Plugin::GithubMeta)
-- [Dist::Zilla::Role::AfterBuild](https://metacpan.org/pod/Dist::Zilla::Role::AfterBuild)
-- [Dist::Zilla](https://metacpan.org/pod/Dist::Zilla)
+- [Dist::Zilla::Plugin::ReadmeAnyFromPod](https://metacpan.org/pod/Dist%3A%3AZilla%3A%3APlugin%3A%3AReadmeAnyFromPod)
+- [Dist::Zilla::Plugin::GithubMeta](https://metacpan.org/pod/Dist%3A%3AZilla%3A%3APlugin%3A%3AGithubMeta)
+- [Dist::Zilla::Role::AfterBuild](https://metacpan.org/pod/Dist%3A%3AZilla%3A%3ARole%3A%3AAfterBuild)
+- [Dist::Zilla](https://metacpan.org/pod/Dist%3A%3AZilla)
 
 # BUGS
 
