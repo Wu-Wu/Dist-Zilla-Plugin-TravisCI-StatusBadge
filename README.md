@@ -23,8 +23,7 @@ version 0.007
 
 # DESCRIPTION
 
-Injects the Travis CI `Build status` badge before the **VERSION** header into any form of `README.md`
-file.
+Injects the Travis CI `Build status` badge before the **VERSION** header into any form of `README.[md|pod]` file.
 
 Traget readme might be pointed via option ["readme"](#readme) or guessed by module.
 
@@ -41,10 +40,14 @@ Use [Dist::Zilla::Plugin::ReadmeAnyFromPod](https://metacpan.org/pod/Dist::Zilla
 
 The name of file to inject build status badge. No default value but there is some logic to guess target
 filename. File can be named as `README` or `Readme` and has the one of following extensions: `md`,
-`mkdn` or `markdown`.
+`mkdn`, `markdown` or `pod`.
 
 In case of some name passed via this option, it will be used only if the target file exists otherwise
 will be checked default variations and used first found.
+
+## format
+
+Either `pod` or `markdown`. Optional. When unspecified, format is `pod` if readme has a `.pod` file extension and `markdown` otherwise.
 
 ## user
 
@@ -67,15 +70,22 @@ using of the raster representation (PNG).
 
 # SEE ALSO
 
-[https://travis-ci.org](https://travis-ci.org)
+Please see those modules/websites for more information related to this module.
 
-[Dist::Zilla::Plugin::ReadmeAnyFromPod](https://metacpan.org/pod/Dist::Zilla::Plugin::ReadmeAnyFromPod)
+- [https://travis-ci.org](https://travis-ci.org)
+- [Dist::Zilla::Plugin::ReadmeAnyFromPod](https://metacpan.org/pod/Dist::Zilla::Plugin::ReadmeAnyFromPod)
+- [Dist::Zilla::Plugin::GithubMeta](https://metacpan.org/pod/Dist::Zilla::Plugin::GithubMeta)
+- [Dist::Zilla::Role::AfterBuild](https://metacpan.org/pod/Dist::Zilla::Role::AfterBuild)
+- [Dist::Zilla](https://metacpan.org/pod/Dist::Zilla)
 
-[Dist::Zilla::Plugin::GithubMeta](https://metacpan.org/pod/Dist::Zilla::Plugin::GithubMeta)
+# BUGS
 
-[Dist::Zilla::Role::AfterBuild](https://metacpan.org/pod/Dist::Zilla::Role::AfterBuild)
+Please report any bugs or feature requests on the bugtracker website
+[https://github.com/Wu-Wu/Dist-Zilla-Plugin-TravisCI-StatusBadge/issues](https://github.com/Wu-Wu/Dist-Zilla-Plugin-TravisCI-StatusBadge/issues)
 
-[Dist::Zilla](https://metacpan.org/pod/Dist::Zilla)
+When submitting a bug or request, please include a test-file or a
+patch to an existing test-file that illustrates the bug or desired
+feature.
 
 # AUTHOR
 
