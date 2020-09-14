@@ -6,7 +6,7 @@ Dist::Zilla::Plugin::TravisCI::StatusBadge - Get Travis CI status badge for your
 
 # VERSION
 
-version 0.007
+version 0.009
 
 # SYNOPSIS
 
